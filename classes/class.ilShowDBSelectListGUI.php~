@@ -1,0 +1,99 @@
+<?php
+
+class ilShowDBSelectListGUI
+{
+
+private $ndir;
+private $orderby;
+private $con;
+private $daten;
+
+function __construct($orderby,$ndir,$con)
+{
+	$this->con=$con;
+	$this->orderby=$orderby;
+	$this->ndir=$ndir;
+	$this->daten=array();
+}
+
+// Zählt die abgefragten Zeilen
+function getRowCount()
+	{
+	return count($this->daten);	
+	}
+
+function getSQL()
+	{
+	global $tpl, $ilTabs;
+		
+	$ilTabs->activateTab("content");		
+		
+	// DB-Verbindung
+	//if(mysql_connect($this->object->getOptionServer(),$this->object->getOptionUser(),$this->object->getOptionPW()));
+ 	$con = mysql_connect($this->object->getOptionServer(),$this->object->getOptionUser(),$this->object->getOptionPW());
+ 	if (!$con) $content = 'Keine Verbindung zur Datenbank' . mysql_error();
+ 	if (!mysql_select_db($this->object->getOptionDB())) $content = "Datenbank nicht vorhanden";				
+		
+	if (!$content)
+	{
+  
+ 	// SQL-Abfrage	
+ 	$sql = $this->object->getOptionSQL().$orderby;
+ 	$query = mysql_query($sql);
+ 	$daten = array();
+ 
+	// Tabellenkopf
+	$content .= "<table>
+ 	<tr>"; 
+ 
+ 	for($i = 0; @$field = mysql_field_name($query, $i); $i++)
+ 		{
+ 		$content .= "<th align='center'><a href='".$this->getLink($field,$ndir)."'>" . $field . " </a>" . "</th>";
+ 
+ 		$daten[$i] = $field;
+ 		}
+ 
+ 	$content .= "</tr>";
+ 
+ 	// Datenausgabe 
+	if (mysql_num_rows($query))
+ 	{
+ 	while ($row = mysql_fetch_object($query))
+		 {
+		 $content .= "<tr>";
+ 	 	foreach ($daten AS $key => $value)
+ 			{
+	 		if ($key % 2 == null) {	$col = "#EEFDC1"; }
+ 			else { $col = "#EEEEFF"; }
+ 
+ 	 		$content .= "<td bgcolor='$col'>" . $row->$value . "</td>";
+ 			}
+ 
+ 	 	$content .= "</tr>";
+	 	}
+ 
+ 	}
+ 	else
+ 		{ $content .= "<tr><td colspan='" . count($daten) ."'>keine Einträge</td></tr>"; }
+ 	
+ 	$content .= "</table>";
+	}
+		
+		$tpl->setContent($content);
+	}
+	
+	// Rückgabe des Links zur Änderung der Sortierreihenfolge
+    private function getLink($field,$ndir)
+    {
+        $link = $_SERVER["REQUEST_URI"];
+        $zeichen_eins = strpos($link, 'cmd');
+        $zeichen_zwei = strpos($link, '&cmdClass', $zeichen_eins);
+
+        return substr_replace($link, 'showContent&sortcol=' . $field . '&dir='.$ndir, $zeichen_eins + 4, $zeichen_zwei - $zeichen_eins - 4);
+        
+    }
+	
+}
+
+
+?>

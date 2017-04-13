@@ -1,0 +1,107 @@
+<?php
+include_once ('Services/Table/classes/class.ilTable2GUI.php');
+class ilShowDbSelectTableGUI
+{
+
+	private tableTitle:
+	
+	 //Konstruktor initialisiert Variabeln mit Default-Werten und setzt das Template
+    function __construct($a_parent_obj, $a_parent_cmd)
+    {
+        global $ilCtrl,$ilUser;
+        parent::__construct($a_parent_obj, $a_parent_cmd);
+
+        
+        
+        // sets the template which describe the appearance of the table
+        $this->rowtemplate="tpl.leer.html";
+        $this->rowtemplatepath=$template_path;
+        $this->setRowTemplate($this->rowtemplate,
+            '/Customizing/global/plugins/Services/Repository/RepositoryObject/ShowDbSelect');
+        
+    }
+
+	
+	
+	
+	
+	
+	//Setzt die Daten welche in die Zeilen kommen sollen
+    //Muss ein Array der folgenden Form sein: array(array('row1 column1','row1 column2'),array('row2 column1','row 2 column2'))
+    //Die Arrays im Array müssen assoziativ sein
+    function setmyData($data)
+    {
+        $this->setData($data);
+    }
+
+	 function setTableTitle($title)
+    {
+        $this->tableTitle=$title;
+    }
+
+	 //Beendet die Tabelle und gibt deren HTML-Code zurück
+    function getTableHTMLCODE()
+    {
+        global $lng;
+
+        foreach ($this->getColumns() as $column) {
+
+            if($column["database_name"]=="") {
+                $sort = $column["sort_and_filter"];
+            }else
+            {
+                $sort = $column["database_name"];
+            }
+
+
+
+            $this->addColumn($column["column_name"], $sort, $column["width"] . "%");
+        }
+        
+        if($this->actionbutton_exists)
+        {
+            $this->addColumn($lng->txt('actions'));
+        }
+        
+        $this->setTitle($this->tableTitle);
+        
+        return $this->getHTML();
+    }
+
+	 //Gibt die Daten an das Standardtemplate zur Ausgabe weiter
+    protected function fillRow($a_set)
+    {
+        $this->tpl->setCurrentBlock("tbl_content_cell");
+        foreach ((array) $a_set as $key => $value)
+        {
+            if(!$this->is_id_shown)
+            {
+                if($key != 'id') {
+                    if ($value == false OR $value == NULL OR strlen($value) == 0) {
+                        $value = ' ';
+                    }
+                    $this->tpl->setVariable("TBL_CONTENT_CELL", $value);
+                    $this->tpl->parseCurrentBlock();
+                }
+            }else
+            {
+                if ($value == false OR $value == NULL OR strlen($value) == 0) {
+                    $value = ' ';
+                }
+                $this->tpl->setVariable("TBL_CONTENT_CELL", $value);
+                $this->tpl->parseCurrentBlock();
+            }
+        }
+        if($this->actionbutton_exists)
+        {
+            $this->tpl->setVariable('TBL_CONTENT_CELL',$this->actionbutton($a_set['id']));
+            $this->tpl->parseCurrentBlock();
+        }
+        $this->tpl->setCurrentBlock("tbl_content_row");
+        $this->tpl->parseCurrentBlock();
+    }
+
+
+}
+
+?>

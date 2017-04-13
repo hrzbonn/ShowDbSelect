@@ -1,0 +1,41 @@
+// 
+// German Language File for ExampleObject Plugin
+//
+
+<!-- language file start -->
+obj_xdbs#:#SQL-Ausgabe
+objs_xdbs#:#SQL-Ausgabe
+obj_xdbs_duplicate#:#Kopieren
+objs_xdbs_duplicate#:#Kopieren SQL-Ausgabe
+obj_xdbs_select#:#Select SQL-Ausgabe
+xdbs_add#:#SQL-Ausgabe hinzufügen
+xdbs_new#:#Neue SQL-Ausgabe hinzufügen
+xdbs_read#:#Lesezugriff auf SQL-Ausgabe
+xdbs_write#:#SQL-Ausgabe editieren
+xdbs_delete#:#SQL-Ausgabe löschen
+xdbs_visible#:#SQL-Ausgabe ist sichtbar
+xdbs_edit_permission#:#Berechtigungseinstellungen ändern
+crs_create_xdbs#:#SQL-Ausgabe erstellen
+grp_create_xdbs#:#SQL-Ausgabe erstellen
+fold_create_xdbs#:#SQL-Ausgabe erstellen
+root_create_xdbs#:#SQL-Ausgabe erstellen
+cat_create_xdbs#:#SQL-Ausgabe erstellen
+content#:#Inhalt
+properties#:#Einstellungen
+edit_properties#:#Einstellungen ändern
+title#:#Titel
+description#:#Beschreibung
+option_server#:#Servername
+option_user#:#DB-Nutzer
+option_pw#:#DB-Passwort
+option_db#:#Datenbank
+option_sql#:#SQL-Abfrage
+save#:#Speichern
+cancel#:#Abbrechen
+edit#:#Ändern
+status#:#Status
+offline#:#Offline
+example_plugin_configuration#:#Konfiguration des SQL-Ausgabe-Plugins
+setting_1#:#Setting 1
+setting_2#:#Setting 2
+saving_invoked#:#Gespeichert

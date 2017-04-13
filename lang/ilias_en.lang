@@ -1,0 +1,38 @@
+// 
+// English Language File for ExampleObject Plugin
+//
+
+<!-- language file start -->
+obj_xdbs#:#Example
+objs_xdbs#:#Examples
+obj_xdbs_duplicate#:#Copy
+objs_xdbs_duplicate#:#Copy Example
+obj_xdbs_select#:#Select Example
+xdbs_add#:#Add Example
+xdbs_new#:#Add New Example
+xdbs_read#:#Read access to Example
+xdbs_write#:#Edit Example
+xdbs_delete#:#Delete Example
+xdbs_visible#:#Example is visible
+xdbs_edit_permission#:#Change permission settings
+crs_create_xdbs#:#Create Example
+grp_create_xdbs#:#Create Example
+fold_create_xdbs#:#Create Example
+root_create_xdbs#:#Create Example
+cat_create_xdbs#:#Create Example
+content#:#Content
+properties#:#Properties
+edit_properties#:#Edit Properties
+title#:#Title
+description#:#Description
+option_one#:#Option One
+option_two#:#Option Two
+save#:#Save
+cancel#:#Cancel
+edit#:#Edit
+status#:#Status
+offline#:#Offline
+example_plugin_configuration#:#Exampl Plugin Configuration
+setting_1#:#Setting 1
+setting_2#:#Setting 2
+saving_invoked#:#Save procedure has been executed. Please note that this example does not save anything to DB.
